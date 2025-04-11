@@ -565,7 +565,7 @@
     <div class="modal-content">
       <span class="close-btn" onclick="closeLoginModal()">&times;</span>
       <h2>Login</h2>
-      <input type="text" id="username" placeholder="Username" />
+      <input type="text" id="email" placeholder="Email" />
       <input type="password" id="password" placeholder="Password" />
       <button onclick="login()">Login</button>
       <p>Don't have an account? <a href="#" onclick="openRegisterModal()">Register here</a></p>
@@ -633,7 +633,7 @@
 
   <script>
     async function login() {
-      const email = document.getElementById("username").value;
+      const email = document.getElementById("email").value;
       const password = document.getElementById("password").value;
 
       try {
@@ -650,7 +650,9 @@
         if (data.success) {
           localStorage.setItem("token", data.token);
           alert("Login successful!");
-          closeLoginModal(); // Optionally close the modal
+          closeLoginModal();
+          window.location.href = "profile.html";
+          // Optionally close the modal
           // You can now call protected APIs
         } else {
           alert("Login failed: " + data.error);
@@ -660,6 +662,7 @@
         alert("An error occurred during login.");
       }
     }
+    
   </script>
 
 
