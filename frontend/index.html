@@ -23,41 +23,51 @@
 
 <body>
   <header>
-    <img src="/frontend/airplane.png" style="width: 4%;" alt="">
-    <div id="logo1" class="logo">smarTour</div>
+    <div class="logo-container">
+      <img src="/frontend/airplane.png" style="width: 36px; margin-right: 8px;" id="logo" alt="smarTour logo">
+      <div id="logo1" class="logo">smarTour</div>
+    </div>
     <nav>
       <ul class="nav-links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#AI">Destinations</a></li>
-        <li><a href="#">Tours</a></li>
-        <li><a href="#blog">Blog</a></li>
+        <li><a href="#" class="active">Home</a></li>
+        <li><a href="#destinations">Our Tours</a></li>
+        <li><a href="#trip-planner">Trip Planner</a></li>
+        <li><a href="#ai-planner">Ai Trips </a></li>
+        <li><a href="#blog">Blogs</a></li>
       </ul>
     </nav>
     <button class="cta-button" onclick="openLoginModal()">Sign In</button>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   </header>
   <div class="hero">
-    <h1>Dream, Explore, Discover</h1>
-    <section>
+    <h1>Dream. Explore. Discover.</h1>
+    <p id="destinations">Your AI-powered travel companion for unforgettable adventures around the world.</p>
+    
+    <!-- Enhanced Gallery Section -->
+    <section >
       <div class="gallery-container">
-        <h2>Popular Destinations</h2>
-        <h2>Travel Gallery</h2>
+        <h2>Popular Destination Tours</h2>
         <div class="gallery">
-          <img src="/res/goa.jpeg" alt="Beautiful Beach" onclick="openLightbox(this)" />
-          <img src="/res/hardergrat-trail-04294.webp" alt="Mountain View" onclick="openLightbox(this)" />
-          <img src="/res/Kinkakuji-Temple.jpg" alt="Historical Site" onclick="openLightbox(this)" />
-          <img src="/res/manali.jpeg" alt="City Skyline" onclick="openLightbox(this)" />
-          <img src="/res/Sensoji Temple.avif" alt="Desert Adventure" onclick="openLightbox(this)" />
-          <img src="/res/antarctica.avif" alt="Forest Hiking" onclick="openLightbox(this)" />
+          <img src="/res/goa.jpeg" alt="Beautiful Beaches of Goa" onclick="openLightbox(this)" />
+          <img src="/res/hardergrat-trail-04294.webp" alt="Stunning Mountain Trails" onclick="openLightbox(this)" />
+          <img src="/res/Kinkakuji-Temple.jpg" alt="Historic Kinkakuji Temple" onclick="openLightbox(this)" />
+          <img src="/res/manali.jpeg" alt="Scenic Manali Landscapes" onclick="openLightbox(this)" />
+          <img src="/res/Sensoji Temple.avif" alt="Majestic Sensoji Temple" onclick="openLightbox(this)" />
+          <img src="/res/antarctica.avif" alt="Breathtaking Antarctica" onclick="openLightbox(this)" />
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Santorini Whitewashed Houses" onclick="openLightbox(this)" />
+ 
+<img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Northern Lights in Iceland" onclick="openLightbox(this)" />
+
         </div>
       </div>
     </section>
+  
 
     <div class="testimonials">
       <div id="AI" class="testimonial active">
         <p>
           "Great travel experience! The AI guide helped me explore hidden gems
-          I wouldn’t have found otherwise."
+          I wouldn't have found otherwise."
         </p>
       </div>
       <div class="testimonial">
@@ -85,7 +95,7 @@
         </p>
       </div>
     </div>
-    <section class="search-section">
+    <section class="search-section" id="trip-planner">
       <h2 class="blog-title">Get attractions by city name</h2>
       <p>Your AI-powered travel companion for the best experiences.</p>
       <div class="search-bar">
@@ -112,10 +122,10 @@
     
   </div>
 
-  <section class="search-section">
+  <section class="search-section" id="ai-planner">
     <div id="ai-tour" class="ai-tour-container">
       <h2>AI-Powered Travel Guide</h2>
-      <h2>Discover the world with personalized recommendations.</h2>
+      <h3>Discover the world with personalized recommendations.</h3>
       <section class="ai-trip-planner">
         <h2>Plan Your Trip with AI</h2>
         <div class="trip-form">
@@ -129,7 +139,7 @@
         <div id="chat-box" class="chat-box"></div>
       </section>
       
-      <button class="cta-button">Get Started</button>
+      <!-- <button class="cta-button">Get Started</button> -->
 
     </div>
   </section>
@@ -162,6 +172,33 @@
           <button class="read-more">Read More</button>
         </div>
       </div>
+      <div class="blog-card" onclick="openBlog(3)">
+        <img src="https://images.pexels.com/photos/6954777/pexels-photo-6954777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Safety Tips">
+        <div class="blog-content">
+          <h3>Essential Travel Safety Tips</h3>
+          <p>Stay safe while exploring new destinations with these practical guidelines...</p>
+          <button class="read-more"x>Read More</button>
+        </div>
+      </div>
+      
+      <div class="blog-card" onclick="openBlog(4)">
+        <img src="https://images.pexels.com/photos/547116/pexels-photo-547116.jpeg" alt="Solo Travel">
+        <div class="blog-content">
+          <h3>Solo Travel: A Complete Guide</h3>
+          <p>Everything you need to know to confidently travel alone and make the most of it...</p>
+          <button class="read-more">Read More</button>
+        </div>
+      </div>
+      
+      <div class="blog-card" onclick="openBlog(5)">
+        <img src="https://images.pexels.com/photos/3185487/pexels-photo-3185487.jpeg" alt="Eco Travel">
+        <div class="blog-content">
+          <h3>Eco-Friendly Travel Hacks</h3>
+          <p>Discover how to reduce your environmental impact while still enjoying the journey...</p>
+          <button class="read-more">Read More</button>
+        </div>
+      </div>
+      
     </div>
   </section>
 
@@ -209,8 +246,7 @@
   </div>
 
 
-  <footer>smarTour.</footer>
-
+  <footer>&copy; 2025 smarTour. </footer>
   <script>
     function openLoginModal() {
       document.getElementById("loginModal").style.display = "flex";
@@ -408,22 +444,38 @@
     });
 
     const blogPosts = [
-      {
-        title: "Exploring Hidden Gems",
-        content: "Discover the top underrated travel spots around the world. Many destinations are hidden from tourists but offer amazing experiences...",
-        image: "/res/hidden.avif"
-      },
-      {
-        title: "How to Travel on a Budget",
-        content: "Learn smart travel hacks to save money and still enjoy your trips. Budget-friendly travel is possible with careful planning and resourcefulness...",
-        image: "/res/budget.avif"
-      },
-      {
-        title: "Must-Try Local Cuisines",
-        content: "Explore the best foods you must try when visiting different countries. Every place has a unique taste and culture to offer...",
-        image: "/res/localfood.avif"
-      }
-    ];
+  {
+    title: "Exploring Hidden Gems",
+    content: "Discover the top underrated travel spots around the world. Many destinations are hidden from tourists but offer amazing experiences...",
+    image: "/res/hidden.avif"
+  },
+  {
+    title: "How to Travel on a Budget",
+    content: "Learn smart travel hacks to save money and still enjoy your trips. Budget-friendly travel is possible with careful planning and resourcefulness...",
+    image: "/res/budget.avif"
+  },
+  {
+    title: "Must-Try Local Cuisines",
+    content: "Explore the best foods you must try when visiting different countries. Every place has a unique taste and culture to offer...",
+    image: "/res/localfood.avif"
+  },
+  {
+    title: "Solo Travel Guide",
+    content: "Empower your wanderlust with tips, destinations, and safety guides designed for solo travelers. Embrace the freedom of solo adventures...",
+    image: "https://images.pexels.com/photos/6954777/pexels-photo-6954777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+  },
+  {
+    title: "Nature Escapes",
+    content: "Unplug and recharge by escaping into breathtaking natural destinations—from forest getaways to serene mountains and lakes...",
+    image: "https://images.pexels.com/photos/547116/pexels-photo-547116.jpeg"
+  },
+  {
+    title: "Cultural Hotspots",
+    content: "Dive into the richness of cultures through local festivals, ancient traditions, and historical landmarks across the globe...",
+    image: "https://images.pexels.com/photos/3185487/pexels-photo-3185487.jpeg"
+  }
+];
+
 
     function openBlog(index) {
       const modal = document.getElementById("blogModal");
