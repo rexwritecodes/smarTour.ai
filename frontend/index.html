@@ -116,21 +116,19 @@
     <div id="ai-tour" class="ai-tour-container">
       <h2>AI-Powered Travel Guide</h2>
       <h2>Discover the world with personalized recommendations.</h2>
-      <section id="ai">
-        <section>
-          <p style="font-size: 2rem; font-weight: bold;">Get Ai Suggested Tours</p>
-        </section>
-        <div class="chat-container">
-          <form autocomplete="off" onsubmit="return false;">
-          <input type="text" id="user-input" placeholder="Enter Place" />
-          <input type="text" id="days" placeholder="Enter Days" />
-          <input type="text" id="budget" placeholder="Enter Budget" />
-          <input type="text" id="type" placeholder="Solo or Family" />
-          <button id="send-btn">Search</button>
-          <div id="chat-box"></div>
-        </form>
+      <section class="ai-trip-planner">
+        <h2>Plan Your Trip with AI</h2>
+        <div class="trip-form">
+          <input type="text" id="user-input" placeholder="Enter your destination..." autocomplete="off" />
+          <input type="text" id="type" placeholder="Traveler type (e.g. Solo, Family)" autocomplete="off" />
+          <input type="number" id="days" placeholder="Number of days" />
+          <input type="number" id="budget" placeholder="Budget in INR" />
+          <button id="send-btn">Get AI Plan</button>
         </div>
+      
+        <div id="chat-box" class="chat-box"></div>
       </section>
+      
       <button class="cta-button">Get Started</button>
 
     </div>
@@ -200,13 +198,13 @@
           spellcheck="false"
         />
       </form>
+      <button onclick="handleAskAI()">Send</button>
     </div>
   </div>
   
 
    
 
-      <button onclick="handleAskAI()">Send</button>
     </div>
   </div>
 
@@ -450,7 +448,65 @@
 
 
   </script>
-
+  <script>
+    // 👇 All your variables and event listener here
+    const chatBox = document.getElementById("chat-box");
+    const days = document.getElementById("days");
+    const userInput = document.getElementById("user-input");
+    const budget = document.getElementById("budget");
+    const type = document.getElementById("type");
+    const sendBtn = document.getElementById("send-btn");
+  
+    const loader = document.createElement("div");
+    loader.classList.add("loader");
+    loader.innerHTML = "<span>Getting Recommendation from AI...</span>";
+  
+    async function getAITripPlan(destination, days, budget, type) {
+      try {
+        const response = await fetch("http://localhost:5000/api/ai/trip", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ destination, days, budget, type }),
+        });
+        const data = await response.json();
+        return response.ok ? data.aiMessage : `Error: ${data.error}`;
+      } catch (err) {
+        return "Something went wrong while fetching the trip plan.";
+      }
+    }
+  
+    function appendMessage(sender, text) {
+      const messageDiv = document.createElement("div");
+      messageDiv.classList.add(sender);
+      const cleanedText = text.replace(/\*\*/g, "").replace(/\*/g, "➡️");
+      messageDiv.innerText = cleanedText;
+      chatBox.appendChild(messageDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+  
+    // 🔥 THIS is the part you're asking about:
+    sendBtn.addEventListener("click", async () => {
+      const destination = userInput.value.trim();
+      const daysValue = days.value.trim();
+      const budgetValue = budget.value.trim();
+      const typeValue = type.value.trim();
+  
+      if (!destination || !daysValue || !budgetValue || !typeValue) {
+        alert("Please fill in all fields.");
+        return;
+      }
+  
+      if (!document.querySelector(".loader")) {
+        chatBox.appendChild(loader);
+      }
+  
+      const aiResponse = await getAITripPlan(destination, daysValue, budgetValue, typeValue);
+      loader.remove();
+      appendMessage("ai", aiResponse);
+    });
+  </script>
+  </body>
+  
   <h3 id="welcomeText"></h3>
 
   <div id="loginModal" class="modal">

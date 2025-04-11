@@ -16,7 +16,7 @@ const excludedCategories = [
 ];
 
 // ✅ GET Route: Fetch and filter tourist attractions
-router.get("/", async (req, res) => {
+router.get("/", async (req, res) => {  // Use "/" instead of "/places"
     try {
         const city = req.query.city || "Pune";
         const WIKI_API_URL = `https://en.wikipedia.org/w/api.php?action=query&format=json&prop=pageterms|pageimages&generator=search&gsrsearch=tourist+attractions+in+${city}&piprop=original`;
@@ -45,9 +45,13 @@ router.get("/", async (req, res) => {
         // ✅ Fetch images from Pexels if Wikipedia has no images
         for (let place of places) {
             if (!place.image) {
-                const pexelsImages = await getPexelsImages(`${place.name} ${city}`, 1);
-                if (pexelsImages.length > 0) {
-                    place.image = page.thumbnail?.source.replace(/(\d+)px/, "1024px");
+                try {
+                    const pexelsImages = await getPexelsImages(`${place.name} ${city}`, 1);
+                    if (pexelsImages && pexelsImages.length > 0) {
+                        place.image = pexelsImages[0]; // Fix: Use the actual image URL from pexels
+                    }
+                } catch (err) {
+                    console.error(`Error fetching Pexels image for ${place.name}:`, err);
                 }
             }
         }

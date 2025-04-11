@@ -561,41 +561,6 @@ header {
     }
   }
 
-  .chat-container {
-    display: flex;
-    justify-content: center;
-    min-width: 70vw;
-    max-width: 800px;
-    margin: 20px auto;
-    background: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0.1, 0, 0, 0.1);
-    padding: 20px;
-}
-#user-input {
-  width: 15%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-#days {
-width: 10%;
-padding: 10px;
-border: 1px solid #ddd;
-border-radius: 5px;
-}
-#budget {
-width: 15%;
-padding: 10px;
-border: 1px solid #ddd;
-border-radius: 5px;
-}
-#type {
-width: 15%;
-padding: 10px;
-border: 1px solid #ddd;
-border-radius: 5px;
-}
   .ai-chat-widget {
     position: fixed;
     bottom: 20px;
@@ -607,6 +572,34 @@ border-radius: 5px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+.ai-trip-planner {
+  padding: 20px;
+  border: 1px solid #ccc;
+  margin-top: 20px;
+  border-radius: 12px;
+  background-color: #f8f9fa;
+}
+
+.trip-form input,
+.trip-form button {
+  padding: 10px;
+  margin: 8px 0;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.chat-box {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
 }
 
 .chat-header {
