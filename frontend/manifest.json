@@ -1,0 +1,21 @@
+{
+    "name": "smarTour",
+    "short_name": "smarTour",
+    "start_url": "/index.html",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#0fa3b1",
+    "icons": [
+      {
+        "src": "/frontend/airplane.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      },
+      {
+        "src": "/frontend/airplane.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ]
+  }
+  

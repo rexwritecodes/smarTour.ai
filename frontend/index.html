@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>smarTour - AI Travel Guide</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    />
+    <link rel="icon" type="image/png" href="/frontend/airplane.png">  </head>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="manifest" href="manifest.json" />
+    <script src="script.js"></script>
+    <script src="ai.js"></script>
+
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0fa3b1;
+      }
+      nav a {
+        margin: 0 15px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+      }
+      .hero {
+        text-align: center;
+        padding: 80px 20px;
+        background: #ffffff;
+        /* height: 1080px; */
+      }
+      .hero h1 {
+        font-size: 36px;
+        color: #333;
+      }
+      .hero p {
+        font-size: 18px;
+        color: #666;
+      }
+      .search-bar {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+      }
+      input,
+      button {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      input {
+        width: 300px;
+        margin-right: 10px;
+      }
+      button {
+        background: #0fa3b1;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .places-container {
+        text-align: center;
+        padding: 40px 20px;
+      }
+      .places-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+      }
+      .place-card {
+        width: 250px;
+        padding: 15px;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: left;
+      }
+      .place-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      footer {
+        text-align: center;
+        padding: 20px;
+        background: #0fa3b1;
+        color: white;
+      }
+      .testimonials {
+        text-align: center;
+        padding: 40px 20px;
+        background: #f5f5f5;
+        font-size: 18px;
+        font-style: italic;
+        color: #333;
+        height: 80px; /* Increased height for multi-line text */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .testimonial {
+        position: absolute;
+        opacity: 0;
+        transition: opacity 1s ease-in-out; /* Smooth fade effect */
+        max-width: 80%;
+      }
+
+      .testimonial.active {
+        opacity: 1;
+      }
+      /* Gallery Styling */
+      .gallery-container {
+        text-align: center;
+        padding: 40px 20px;
+        background: #ffffff;
+      }
+
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .gallery img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .gallery img:hover {
+        transform: scale(1.05);
+      }
+
+      /* Lightbox Effect */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .lightbox-content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .lightbox img {
+        max-width: 90%;
+        max-height: 80%;
+        border-radius: 10px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      .close-btn {
+        margin-top: 10px;
+        background: red;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      .close-btn:hover {
+        background: darkred;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <header>
+      <img src="/frontend/airplane.png" style="width: 4%;" alt="">
+      <div id="logo1" style="margin-left: -20rem;" class="logo">smarTour</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" >Home</a></li>
+          <li><a href="#AI">Destinations</a></li>
+          <li><a href="/ai.js">Tours</a></li>
+          <li><a href="#blog">Blog</a></li>
+        </ul>
+      </nav>
+      <button class="cta-button">Sign In</button>
+      <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    </header>
+    <script>
+      function toggleDiv() {
+          let div = document.getElementById("chat1");
+          if (div.style.display === "none") {
+              div.style.display = "block"; // Show div
+          } else {
+              div.style.display = "none"; // Hide div
+          }
+      }
+  </script>
+    <div class="hero">
+      <h1>Dream, Explore, Discover</h1>
+      <section>
+        <div  class="gallery-container">
+          <h2>Popular Destinations</h2>
+          <h2>Travel Gallery</h2>
+          <div class="gallery">
+            <img
+              src="/res/goa.jpeg"
+              alt="Beautiful Beach"
+              onclick="openLightbox(this)"
+            />
+            <img
+              src="/res/hardergrat-trail-04294.webp"
+              alt="Mountain View"
+              onclick="openLightbox(this)"
+            />
+            <img
+              src="/res/Kinkakuji-Temple.jpg"
+              alt="Historical Site"
+              onclick="openLightbox(this)"
+            />
+            <img
+              src="/res/manali.jpeg"
+              alt="City Skyline"
+              onclick="openLightbox(this)"
+            />
+            <img
+              src="/res/Sensoji Temple.avif"
+              alt="Desert Adventure"
+              onclick="openLightbox(this)"
+            />
+            <img
+              src="/res/antarctica.avif"
+              alt="Forest Hiking"
+              onclick="openLightbox(this)"
+            />
+          </div>
+        </div>
+      </section>
+
+      <div class="testimonials">
+        <div id="AI" class="testimonial active">
+          <p>
+            "Great travel experience! The AI guide helped me explore hidden gems
+            I wouldn’t have found otherwise."
+          </p>
+        </div>
+        <div class="testimonial">
+          <p>
+            "Loved the destinations! The recommendations were spot on, and the
+            booking process was seamless."
+          </p>
+        </div>
+        <div class="testimonial">
+          <p>
+            "Affordable packages and amazing guides! This platform made my dream
+            vacation possible within budget."
+          </p>
+        </div>
+        <div class="testimonial">
+          <p>
+            "I never imagined AI could enhance my travel experience so much! The
+            smart suggestions were incredible."
+          </p>
+        </div>
+        <div class="testimonial">
+          <p>
+            "Highly recommend smarTour! The local insights and real-time updates
+            made my trip stress-free."
+          </p>
+        </div>
+      </div>
+      <section >
+        <h2 class="blog-title">Get attractions by city name</h2>
+      <div ></div>
+      <p>Your AI-powered travel companion for the best experiences.</p>
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Enter a location..." />
+
+        <button id="search" onclick="searchPlace()">Search</button>
+      </div>
+      </section>
+    </div>
+
+    <div class="places-container">
+      <div id="places-list" class="places-grid"></div>
+    </div>
+  
+  
+    <div id="map"></div>
+    <section id="blog">
+      <h2 class="blog-title">Latest Blog Posts</h2>
+      <div class="blog-container">
+        <div class="blog-card" onclick="openBlog(0)">
+          <img src="/res/hidden.avif" alt="Blog Image 1">
+          <div class="blog-content">
+            <h3>Exploring Hidden Gems</h3>
+            <p>Discover underrated travel destinations for your next adventure...</p>
+            <button class="read-more">Read More</button>
+          </div>
+        </div>
+    
+        <div class="blog-card" onclick="openBlog(1)">
+          <img src="/res/budget.avif" alt="Blog Image 2">
+          <div class="blog-content">
+            <h3>How to Travel on a Budget</h3>
+            <p>Save money while traveling with these smart tips...</p>
+            <button class="read-more">Read More</button>
+          </div>
+        </div>
+    
+        <div class="blog-card" onclick="openBlog(2)">
+          <img src="/res/localfood.avif" alt="Blog Image 3">
+          <div class="blog-content">
+            <h3>Must-Try Local Cuisines</h3>
+            <p>Explore the best dishes from different cultures...</p>
+            <button class="read-more">Read More</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Blog Popup Modal -->
+    <div id="blogModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeBlog()">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <img id="modalImage" src="" alt="Blog Image">
+        <p id="modalContent"></p>
+      </div>
+    </div>
+    
+
+    <div class="ai-chat-widget">
+      <div class="chat-header">
+          <span>AI Travel Chatbot</span>
+          <button onclick="toggleDiv()" class="minimize-btn">−</button>
+      </div>
+      <div id="chat1" class="chat-messages"></div>
+      <div class="chat-input">
+          <input type="text" id="userQuery" placeholder="Ask me about travel...">
+          <button onclick="handleAskAI()">Send</button>
+      </div>
+  </div>
+
+    
+    <footer>smarTour.</footer>
+    <script>
+      var map = L.map("map").setView([19.076, 72.8777], 10);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      function addMarker(lat, lon, place) {
+        L.marker([lat, lon])
+          .addTo(map)
+          .bindPopup(`<b>${place}</b>`)
+          .openPopup();
+        map.setView([lat, lon], 12);
+      }
+      let currentTestimonial = 0;
+      const testimonials = document.querySelectorAll(".testimonial");
+
+      function rotateTestimonials() {
+        testimonials[currentTestimonial].classList.remove("active");
+
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+
+        testimonials[currentTestimonial].classList.add("active");
+      }
+
+      // Change testimonial every 4 seconds with smooth fade effect
+      setInterval(rotateTestimonials, 4000);
+
+      function searchPlace() {
+        let query = document.getElementById("searchInput").value;
+        if (!query) {
+          alert("Please enter a location!");
+          return;
+        }
+        fetch(
+          `https://nominatim.openstreetmap.org/search?q=${query}&format=json`
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.length === 0) {
+              alert("Location not found!");
+              return;
+            }
+            let place = data[0];
+            addMarker(place.lat, place.lon, place.display_name);
+            fetch(`http://localhost:5000/api/places?city=${query}`)
+              .then((res) => res.json())
+              .then((result) => showPlaces(result.places))
+              .catch((error) => console.error("Error:", error));
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function showPlaces(places) {
+        let placesDiv = document.getElementById("places-list");
+        placesDiv.innerHTML = "";
+        if (places.length === 0) {
+          placesDiv.innerHTML = "<p>No popular tourist attractions found.</p>";
+          return;
+        }
+        places.forEach((place) => {
+          let placeCard = document.createElement("div");
+          placeCard.className = "place-card";
+          placeCard.innerHTML = `
+                    <img src="${
+                      place.image || "https://via.placeholder.com/200"
+                    }" alt="${place.name}">
+                    <h4>${place.name}</h4>
+                    <p>${place.description}</p>
+                    <a href="${place.url}" target="_blank">More Info</a>
+                `;
+          placesDiv.appendChild(placeCard);
+        });
+      }
+      function showPlaces(places) {
+        let placesDiv = document.getElementById("places-list");
+        placesDiv.innerHTML = "";
+
+        if (places.length === 0) {
+          placesDiv.innerHTML = "<p>No popular tourist attractions found.</p>";
+          return;
+        }
+
+        places.forEach((place, index) => {
+          let placeCard = document.createElement("div");
+          placeCard.className = "place-card";
+          placeCard.innerHTML = `
+            <img src="${
+              place.image || "https://via.placeholder.com/200"
+            }" alt="${place.name}">
+            <h4>${place.name}</h4>
+            <p>${place.description}</p>
+            <a href="${place.url}" target="_blank">More Info</a>
+        `;
+
+          placesDiv.appendChild(placeCard);
+
+          // Delay animation for a smooth effect
+          setTimeout(() => {
+            placeCard.classList.add("show");
+          }, index * 200); // Staggered animation for each card
+        });
+      }
+      function toggleMenu() {
+        document.querySelector(".nav-links").classList.toggle("show");
+      }
+
+      document.getElementById("search").addEventListener("click", function () {
+        let div = document.getElementById("map");
+
+        if (div.style.display === "none" || div.style.display === "") {
+          div.style.display = "block"; // Show after delay
+          setTimeout(() => {
+            div.style.opacity = "1";
+          }, 100); // Slight delay to trigger transition
+        } else {
+          div.style.opacity = "0"; // Fade out first
+          setTimeout(() => {
+            div.style.display = "none";
+          }, 2000); // Hide after transition completes
+        }
+      });
+
+      const blogPosts = [
+  {
+    title: "Exploring Hidden Gems",
+    content: "Discover the top underrated travel spots around the world. Many destinations are hidden from tourists but offer amazing experiences...",
+    image: "/res/hidden.avif"
+  },
+  {
+    title: "How to Travel on a Budget",
+    content: "Learn smart travel hacks to save money and still enjoy your trips. Budget-friendly travel is possible with careful planning and resourcefulness...",
+    image: "/res/budget.avif"
+  },
+  {
+    title: "Must-Try Local Cuisines",
+    content: "Explore the best foods you must try when visiting different countries. Every place has a unique taste and culture to offer...",
+    image: "/res/localfood.avif"
+  }
+];
+
+function openBlog(index) {
+  const modal = document.getElementById("blogModal");
+  document.getElementById("modalTitle").textContent = blogPosts[index].title;
+  document.getElementById("modalImage").src = blogPosts[index].image;
+  document.getElementById("modalContent").textContent = blogPosts[index].content;
+  modal.style.display = "flex"; // Show modal
+}
+
+function closeBlog() {
+  document.getElementById("blogModal").style.display = "none"; // Hide modal
+}
+
+// Close modal when clicking outside of content
+window.onclick = function(event) {
+  const modal = document.getElementById("blogModal");
+  if (event.target === modal) {
+    closeBlog();
+  }
+};
+
+    </script>
+  </body>
+</html>
