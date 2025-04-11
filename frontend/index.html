@@ -36,15 +36,18 @@
         <li><a href="#blog">Blogs</a></li>
       </ul>
     </nav>
-    <button class="cta-button" onclick="openLoginModal()">Sign In</button>
+    <div>
+      <button class="cta-button" onclick="openLoginModal()">Sign In</button>
+      <!-- <button class="logout-btn" id="logout" onclick="logout()">Logout</button> -->
+  </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
   </header>
   <div class="hero">
     <h1>Dream. Explore. Discover.</h1>
     <p id="destinations">Your AI-powered travel companion for unforgettable adventures around the world.</p>
-    
+
     <!-- Enhanced Gallery Section -->
-    <section >
+    <section>
       <div class="gallery-container">
         <h2>Popular Destination Tours</h2>
         <div class="gallery">
@@ -54,14 +57,16 @@
           <img src="/res/manali.jpeg" alt="Scenic Manali Landscapes" onclick="openLightbox(this)" />
           <img src="/res/Sensoji Temple.avif" alt="Majestic Sensoji Temple" onclick="openLightbox(this)" />
           <img src="/res/antarctica.avif" alt="Breathtaking Antarctica" onclick="openLightbox(this)" />
-          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Santorini Whitewashed Houses" onclick="openLightbox(this)" />
- 
-<img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Northern Lights in Iceland" onclick="openLightbox(this)" />
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+            alt="Santorini Whitewashed Houses" onclick="openLightbox(this)" />
+
+          <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80"
+            alt="Northern Lights in Iceland" onclick="openLightbox(this)" />
 
         </div>
       </div>
     </section>
-  
+
 
     <div class="testimonials">
       <div id="AI" class="testimonial active">
@@ -100,26 +105,19 @@
       <p>Your AI-powered travel companion for the best experiences.</p>
       <div class="search-bar">
         <form autocomplete="off" onsubmit="return false;">
-          <input
-            type="search" 
-            id="searchInput"
-            name="no_autofill_location"
-            placeholder="Enter a location..."
-            autocomplete="new-password"
-            autocorrect="off"
-            spellcheck="false"
-          />
+          <input type="search" id="searchInput" name="no_autofill_location" placeholder="Enter a location..."
+            autocomplete="new-password" autocorrect="off" spellcheck="false" />
         </form>
         <button id="search" onclick="searchPlace()">Search</button>
       </div>
       <div class="places-container">
         <div id="places-list" class="places-grid"></div>
       </div>
-    
-    
+
+
       <div id="map"></div>
     </section>
-    
+
   </div>
 
   <section class="search-section" id="ai-planner">
@@ -128,17 +126,23 @@
       <h3>Discover the world with personalized recommendations.</h3>
       <section class="ai-trip-planner">
         <h2>Plan Your Trip with AI</h2>
-        <div class="trip-form">
+         
+          <form autocomplete="off" class="trip-form" onsubmit="return false;">
           <input type="text" id="user-input" placeholder="Enter your destination..." autocomplete="off" />
           <input type="text" id="type" placeholder="Traveler type (e.g. Solo, Family)" autocomplete="off" />
           <input type="number" id="days" placeholder="Number of days" />
           <input type="number" id="budget" placeholder="Budget in INR" />
+        </form>
+        <div class="mid">
+
           <button id="send-btn">Get AI Plan</button>
+
         </div>
-      
+       
+
         <div id="chat-box" class="chat-box"></div>
       </section>
-      
+
       <!-- <button class="cta-button">Get Started</button> -->
 
     </div>
@@ -173,14 +177,16 @@
         </div>
       </div>
       <div class="blog-card" onclick="openBlog(3)">
-        <img src="https://images.pexels.com/photos/6954777/pexels-photo-6954777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Safety Tips">
+        <img
+          src="https://images.pexels.com/photos/6954777/pexels-photo-6954777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          alt="Safety Tips">
         <div class="blog-content">
           <h3>Essential Travel Safety Tips</h3>
           <p>Stay safe while exploring new destinations with these practical guidelines...</p>
-          <button class="read-more"x>Read More</button>
+          <button class="read-more" x>Read More</button>
         </div>
       </div>
-      
+
       <div class="blog-card" onclick="openBlog(4)">
         <img src="https://images.pexels.com/photos/547116/pexels-photo-547116.jpeg" alt="Solo Travel">
         <div class="blog-content">
@@ -189,7 +195,7 @@
           <button class="read-more">Read More</button>
         </div>
       </div>
-      
+
       <div class="blog-card" onclick="openBlog(5)">
         <img src="https://images.pexels.com/photos/3185487/pexels-photo-3185487.jpeg" alt="Eco Travel">
         <div class="blog-content">
@@ -198,7 +204,7 @@
           <button class="read-more">Read More</button>
         </div>
       </div>
-      
+
     </div>
   </section>
 
@@ -218,35 +224,28 @@
       <span>AI Travel Chatbot</span>
       <button onclick="toggleDiv()" class="minimize-btn">+</button>
     </div>
-  
+
     <div id="chat1" style="display: none;" class="chat-messages"></div>
-  
+
     <div class="chat-input" style="display: none;" id="chat2">
       <!-- Wrapped inside a form to control autocomplete -->
       <form autocomplete="off" onsubmit="return false;">
-        <input
-        id="userQuery"
-          type="search"  
-          id="userQuery"
-          name="no_autofill_chatbox"
-          placeholder="Ask me about travel..."
-          autocomplete="new-password"
-          autocorrect="off"
-          spellcheck="false"
-        />
+        <input id="userQuery" type="search" id="userQuery" name="no_autofill_chatbox"
+          placeholder="Ask me about travel..." autocomplete="new-password" autocorrect="off" spellcheck="false" />
       </form>
       <button onclick="handleAskAI()">Send</button>
     </div>
   </div>
-  
 
-   
 
-    </div>
+
+
+  </div>
   </div>
 
 
   <footer>&copy; 2025 smarTour. </footer>
+  
   <script>
     function openLoginModal() {
       document.getElementById("loginModal").style.display = "flex";
@@ -255,22 +254,25 @@
     function closeLoginModal() {
       document.getElementById("loginModal").style.display = "none";
     }
+    // ✅ Utility to update button
+  function updateAuthButton() {
+    const token = localStorage.getItem("token");
+    const authBtn = document.querySelector(".cta-button");
 
-    function login() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
-
-      if (username === "admin" && password === "1234") {
-        alert("Login successful!");
-        closeLoginModal();
-        // Optionally show/hide features after login
-        document.querySelector(".cta-button").innerText = "Logout";
-        document.querySelector(".cta-button").onclick = logout;
-      } else {
-        alert("Invalid credentials.");
-      }
+    if (token) {
+      authBtn.innerText = "Logout";
+      authBtn.onclick = logout;
+    } else {
+      authBtn.innerText = "Sign In";
+      authBtn.onclick = openLoginModal;
     }
-    
+  }
+
+  // ✅ On page load
+  window.onload = function () {
+    updateAuthButton();
+  };
+
     function logout() {
       alert("Logged out.");
       document.querySelector(".cta-button").innerText = "Sign In";
@@ -286,26 +288,9 @@
       document.getElementById("loginModal").style.display = "none";
     }
 
-    function login() {
-      const username = document.getElementById("username").value.trim();
-      const password = document.getElementById("password").value.trim();
+    
 
-      if (username === "admin" && password === "1234") {
-        alert("Login successful!");
-        closeLoginModal();
-        // Optionally show/hide features after login
-        document.querySelector(".cta-button").innerText = "Logout";
-        document.querySelector(".cta-button").onclick = logout;
-      } else {
-        alert("Invalid credentials.");
-      }
-    }
-
-    function logout() {
-      alert("Logged out.");
-      document.querySelector(".cta-button").innerText = "Sign In";
-      document.querySelector(".cta-button").onclick = openLoginModal;
-    }
+     
 
 
     function toggleDiv() {
@@ -346,13 +331,23 @@
 
       testimonials[currentTestimonial].classList.add("active");
     }
-
+    function logout() {
+      localStorage.removeItem("token");
+      window.location.href = "index.html";
+    }
     // Change testimonial every 4 seconds with smooth fade effect
     setInterval(rotateTestimonials, 4000);
 
     function searchPlace() {
       let query = document.getElementById("searchInput").value;
-      if (!query) {
+      
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You're not logged in! Log in to access this feature.");
+        document.getElementById("loginModal").style.display = "flex";
+        return;
+        // redirect if no token
+      }else if (token && !query) {
         alert("Please enter a location!");
         return;
       }
@@ -428,6 +423,12 @@
     }
 
     document.getElementById("search").addEventListener("click", function () {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        document.getElementById("loginModal").style.display = "flex";
+        return;
+        // redirect if no token
+      }
       let div = document.getElementById("map");
 
       if (div.style.display === "none" || div.style.display === "") {
@@ -444,37 +445,37 @@
     });
 
     const blogPosts = [
-  {
-    title: "Exploring Hidden Gems",
-    content: "Discover the top underrated travel spots around the world. Many destinations are hidden from tourists but offer amazing experiences...",
-    image: "/res/hidden.avif"
-  },
-  {
-    title: "How to Travel on a Budget",
-    content: "Learn smart travel hacks to save money and still enjoy your trips. Budget-friendly travel is possible with careful planning and resourcefulness...",
-    image: "/res/budget.avif"
-  },
-  {
-    title: "Must-Try Local Cuisines",
-    content: "Explore the best foods you must try when visiting different countries. Every place has a unique taste and culture to offer...",
-    image: "/res/localfood.avif"
-  },
-  {
-    title: "Solo Travel Guide",
-    content: "Empower your wanderlust with tips, destinations, and safety guides designed for solo travelers. Embrace the freedom of solo adventures...",
-    image: "https://images.pexels.com/photos/6954777/pexels-photo-6954777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-  },
-  {
-    title: "Nature Escapes",
-    content: "Unplug and recharge by escaping into breathtaking natural destinations—from forest getaways to serene mountains and lakes...",
-    image: "https://images.pexels.com/photos/547116/pexels-photo-547116.jpeg"
-  },
-  {
-    title: "Cultural Hotspots",
-    content: "Dive into the richness of cultures through local festivals, ancient traditions, and historical landmarks across the globe...",
-    image: "https://images.pexels.com/photos/3185487/pexels-photo-3185487.jpeg"
-  }
-];
+      {
+        title: "Exploring Hidden Gems",
+        content: "Discover the top underrated travel spots around the world. Many destinations are hidden from tourists but offer amazing experiences...",
+        image: "/res/hidden.avif"
+      },
+      {
+        title: "How to Travel on a Budget",
+        content: "Learn smart travel hacks to save money and still enjoy your trips. Budget-friendly travel is possible with careful planning and resourcefulness...",
+        image: "/res/budget.avif"
+      },
+      {
+        title: "Must-Try Local Cuisines",
+        content: "Explore the best foods you must try when visiting different countries. Every place has a unique taste and culture to offer...",
+        image: "/res/localfood.avif"
+      },
+      {
+        title: "Solo Travel Guide",
+        content: "Empower your wanderlust with tips, destinations, and safety guides designed for solo travelers. Embrace the freedom of solo adventures...",
+        image: "https://images.pexels.com/photos/6954777/pexels-photo-6954777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+      },
+      {
+        title: "Nature Escapes",
+        content: "Unplug and recharge by escaping into breathtaking natural destinations—from forest getaways to serene mountains and lakes...",
+        image: "https://images.pexels.com/photos/547116/pexels-photo-547116.jpeg"
+      },
+      {
+        title: "Cultural Hotspots",
+        content: "Dive into the richness of cultures through local festivals, ancient traditions, and historical landmarks across the globe...",
+        image: "https://images.pexels.com/photos/3185487/pexels-photo-3185487.jpeg"
+      }
+    ];
 
 
     function openBlog(index) {
@@ -508,11 +509,11 @@
     const budget = document.getElementById("budget");
     const type = document.getElementById("type");
     const sendBtn = document.getElementById("send-btn");
-  
+
     const loader = document.createElement("div");
     loader.classList.add("loader");
     loader.innerHTML = "<span>Getting Recommendation from AI...</span>";
-  
+
     async function getAITripPlan(destination, days, budget, type) {
       try {
         const response = await fetch("http://localhost:5000/api/ai/trip", {
@@ -526,7 +527,7 @@
         return "Something went wrong while fetching the trip plan.";
       }
     }
-  
+
     function appendMessage(sender, text) {
       const messageDiv = document.createElement("div");
       messageDiv.classList.add(sender);
@@ -535,135 +536,146 @@
       chatBox.appendChild(messageDiv);
       chatBox.scrollTop = chatBox.scrollHeight;
     }
-  
+
     // 🔥 THIS is the part you're asking about:
     sendBtn.addEventListener("click", async () => {
       const destination = userInput.value.trim();
       const daysValue = days.value.trim();
       const budgetValue = budget.value.trim();
       const typeValue = type.value.trim();
-  
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        alert("You're not logged in! Log in to access this feature.");
+        document.getElementById("loginModal").style.display = "flex";
+        return;
+        // redirect if no token
+      }
+
       if (!destination || !daysValue || !budgetValue || !typeValue) {
         alert("Please fill in all fields.");
         return;
       }
-  
+
       if (!document.querySelector(".loader")) {
         chatBox.appendChild(loader);
       }
-  
+
       const aiResponse = await getAITripPlan(destination, daysValue, budgetValue, typeValue);
       loader.remove();
       appendMessage("ai", aiResponse);
     });
   </script>
-  </body>
-  
-  <h3 id="welcomeText"></h3>
+</body>
 
-  <div id="loginModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeLoginModal()">&times;</span>
-      <h2>Login</h2>
-      <input type="text" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button onclick="login()">Login</button>
-      <p>Don't have an account? <a href="#" onclick="openRegisterModal()">Register here</a></p>
+<h3 id="welcomeText"></h3>
 
-    </div>
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeLoginModal()">&times;</span>
+    <h2>Login</h2>
+    <input type="text" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p>Don't have an account? <a href="#" onclick="openRegisterModal()">Register here</a></p>
+
   </div>
-  <!-- 🔐 Register Modal -->
-  <div id="registerModal" class="modal">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeRegisterModal()">&times;</span>
-      <h2>Register</h2>
-      <input type="text" id="registerName" placeholder="Name" />
-      <input type="text" id="registerEmail" placeholder="Email" />
-      <input type="password" id="registerPassword" placeholder="Password" />
-      <button onclick="register()">Register</button>
-      <p><a href="#" onclick="openLoginModal()">Login</a></p>
-    </div>
+</div>
+<!-- 🔐 Register Modal -->
+<div id="registerModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeRegisterModal()">&times;</span>
+    <h2>Register</h2>
+    <input type="text" id="registerName" placeholder="Name" />
+    <input type="text" id="registerEmail" placeholder="Email" />
+    <input type="password" id="registerPassword" placeholder="Password" />
+    <button onclick="register()">Register</button>
+    <p><a href="#" onclick="openLoginModal()">Login</a></p>
   </div>
+</div>
 
-  <!-- 🧭 Register Link -->
+<!-- 🧭 Register Link -->
 
 
-  <script>
-    // 🔐 Register function
-    // 🔐 Register function
-    async function register() {
-      const username = document.getElementById("registerName").value;
-      const email = document.getElementById("registerEmail").value;
-      const password = document.getElementById("registerPassword").value;
+<script>
+  // 🔐 Register function
+  // 🔐 Register function
+  async function register() {
+    const username = document.getElementById("registerName").value;
+    const email = document.getElementById("registerEmail").value;
+    const password = document.getElementById("registerPassword").value;
 
-      try {
-        const response = await fetch("http://localhost:5000/api/auth/register", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ username, email, password })
-        });
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, email, password })
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (response.ok) {
-          alert(data.message);
-          closeRegisterModal();
-        } else {
-          alert("Register failed: " + data.error);
-        }
-      } catch (error) {
-        console.error("Register error:", error);
-        alert("An error occurred during registration.");
+      if (response.ok) {
+        alert(data.message);
+        closeRegisterModal();
+      } else {
+        alert("Register failed: " + data.error);
       }
+    } catch (error) {
+      console.error("Register error:", error);
+      alert("An error occurred during registration.");
     }
+  }
 
 
-    // 🧭 Modal toggles
-    function openRegisterModal() {
-      document.getElementById("registerModal").style.display = "block";
-      document.getElementById("loginModal").style.display = "none";
-    }
+  // 🧭 Modal toggles
+  function openRegisterModal() {
+    document.getElementById("registerModal").style.display = "flex";
+    document.getElementById("loginModal").style.display = "none";
+  }
 
-    function closeRegisterModal() {
-      document.getElementById("registerModal").style.display = "none";
-    }
-  </script>
+  function closeRegisterModal() {
+    document.getElementById("registerModal").style.display = "none";
+  }
+</script>
 
-  <script>
-    async function login() {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
+<script>
+  async function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
 
-      try {
-        const response = await fetch("http://localhost:5000/api/auth/login", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ email, password })
-        });
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (data.success) {
-          localStorage.setItem("token", data.token);
-          alert("Login successful!");
-          closeLoginModal();
-          window.location.href = "profile.html";
-          // Optionally close the modal
-          // You can now call protected APIs
-        } else {
-          alert("Login failed: " + data.error);
-        }
-      } catch (error) {
-        console.error("Login error:", error);
-        alert("An error occurred during login.");
+      if (data.success) {
+        localStorage.setItem("token", data.token);
+        alert("Login successful!");
+        closeLoginModal();
+        window.location.href = "index.html";
+
+        // Optionally close the modalH
+        // You can now call protected APIs
+      } else {
+        alert("Login failed: " + data.error);
       }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("An error occurred during login.");
     }
-    
-  </script>
+  }
+
+
+
+</script>
 
 
 </body>

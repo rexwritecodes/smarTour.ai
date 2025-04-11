@@ -520,8 +520,8 @@ button:hover {
 .modal-content {
   background: white;
   padding: 30px;
-  width: 80%;
-  max-width: 800px;
+  /* width: 80%;
+  max-width: 800px; */
   border-radius: 15px;
   text-align: left;
   position: relative;
@@ -671,6 +671,25 @@ button:hover {
   border-radius: 50px;
   outline: none;
   font-size: 14px;
+}
+.mid{
+  display: flex;
+  justify-content: center;
+}
+#send-btn{
+}
+#logout{
+  background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50px;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  padding: 12px 24px;
+  display: none;
 }
 
 .chat-input button {
