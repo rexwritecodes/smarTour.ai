@@ -676,8 +676,7 @@ button:hover {
   display: flex;
   justify-content: center;
 }
-#send-btn{
-}
+ 
 #logout{
   background: linear-gradient(45deg, #ff4d4d, #ff1a1a);
   color: white;

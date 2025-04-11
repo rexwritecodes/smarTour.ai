@@ -106,16 +106,16 @@
       <div class="search-bar">
         <form autocomplete="off" onsubmit="return false;">
           <input type="search" id="searchInput" name="no_autofill_location" placeholder="Enter a location..."
-            autocomplete="new-password" autocorrect="off" spellcheck="false" />
+          autocomplete="new-password" autocorrect="off" spellcheck="false" />
         </form>
         <button id="search" onclick="searchPlace()">Search</button>
       </div>
+      <div id="map"></div>
       <div class="places-container">
         <div id="places-list" class="places-grid"></div>
       </div>
 
 
-      <div id="map"></div>
     </section>
 
   </div>
@@ -320,6 +320,7 @@
         .bindPopup(`<b>${place}</b>`)
         .openPopup();
       map.setView([lat, lon], 12);
+      map.invalidateSize();
     }
     let currentTestimonial = 0;
     const testimonials = document.querySelectorAll(".testimonial");

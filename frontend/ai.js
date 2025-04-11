@@ -1,6 +1,6 @@
 async function getTravelRecommendation(userInput) {
     try {
-        const response = await fetch("http://localhost:5000/api/chatbot/ask", { // 👈 Correct port (5000)
+        const response = await fetch("http://localhost:5000/api/chatbot/ask", {  
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userMessage: userInput })
@@ -24,6 +24,7 @@ async function getTravelRecommendation(userInput) {
         let cleanResponse = data.aiMessage
     .replace(/\*\*/g, '')  // Remove bold markdown (**)
     .replace(/\*/g, '')    // Remove italic markdown (*)
+    .replace(/^##\*/gm, '')
     .replace(/([.:!?])\s+([A-Z])/g, '$1\n\n$2') // Add line breaks between sentences
     .replace(/\n\s*\n\s*\n/g, '\n\n') // Remove extra blank lines
     .replace(/^(\*|-)\s/gm, '• ') // Convert * or - lists to bullet points
@@ -85,13 +86,13 @@ document.addEventListener('DOMContentLoaded', function () {
     minimizeBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         chatWidget.classList.toggle('minimized');
-        minimizeBtn.textContent = chatWidget.classList.contains('minimized') ? '+' : '−';
+        minimizeBtn.textContent = chatWidget.classList.contains('minimized') ? '-' : '+';
     });
 
-    chatHeader.addEventListener('click', () => {
-        chatWidget.classList.toggle('minimized');
-        minimizeBtn.textContent = chatWidget.classList.contains('minimized') ? '+' : '−';
-    });
+    // chatHeader.addEventListener('click', () => {
+    //     chatWidget.classList.toggle('minimized');
+    //     minimizeBtn.textContent = chatWidget.classList.contains('minimized') ? '-' : '+';
+    // });
 
     // Add enter key support for input
     const inputField = document.getElementById('userQuery');
