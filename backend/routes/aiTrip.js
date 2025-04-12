@@ -9,7 +9,7 @@ router.post("/trip", async (req, res) => {
     return res.status(400).json({ error: "All fields are required" });
   }
 
-  const prompt = `Act as a travel planning assistant. Suggest a ${days}-day itinerary for a ${type} traveler visiting ${destination} for the first time. Focus on cultural experiences, local food, and must-see landmarks. Budget is ${budget} INR. Provide transportation options and estimated costs. Format the output as a day-by-day schedule.`;
+  const prompt = `Act as a travel planning assistant. Suggest a ${days}-day itinerary for a ${type} traveler visiting ${destination} for the first time. Focus on cultural experiences, local food, and must-see landmarks. Budget is ${budget} INR. Provide transportation options and estimated costs. Format the output as a day-by-day schedule. also list what prerequisites are needed for the trip. Include a list of must-see places and their distances from the hotel. Use markdown for formatting.`;
 
   try {
     const response = await fetch(
